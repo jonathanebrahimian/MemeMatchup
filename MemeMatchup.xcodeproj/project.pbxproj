@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		551A434926E1CDEE0034846B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A434826E1CDEE0034846B /* AppDelegate.swift */; };
 		551A434B26E1CDEE0034846B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A434A26E1CDEE0034846B /* SceneDelegate.swift */; };
-		551A434D26E1CDEE0034846B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A434C26E1CDEE0034846B /* ViewController.swift */; };
+		551A434D26E1CDEE0034846B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A434C26E1CDEE0034846B /* HomeViewController.swift */; };
 		551A435026E1CDEE0034846B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551A434E26E1CDEE0034846B /* Main.storyboard */; };
 		551A435226E1CDF00034846B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551A435126E1CDF00034846B /* Assets.xcassets */; };
 		551A435526E1CDF00034846B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551A435326E1CDF00034846B /* LaunchScreen.storyboard */; };
 		551A436026E1CDF00034846B /* MemeMatchupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A435F26E1CDF00034846B /* MemeMatchupTests.swift */; };
 		551A436B26E1CDF00034846B /* MemeMatchupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A436A26E1CDF00034846B /* MemeMatchupUITests.swift */; };
+		551A437F26E1DDE60034846B /* MemeCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A437E26E1DDE50034846B /* MemeCreationViewController.swift */; };
+		551A438426E1DDFD0034846B /* RoundStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A438326E1DDFD0034846B /* RoundStartViewController.swift */; };
+		551A438926E1DE0A0034846B /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A438826E1DE0A0034846B /* ResultsViewController.swift */; };
+		551A438E26E1DE160034846B /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A438D26E1DE160034846B /* ScoreBoardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +42,7 @@
 		551A434526E1CDEE0034846B /* MemeMatchup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMatchup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551A434826E1CDEE0034846B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		551A434A26E1CDEE0034846B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		551A434C26E1CDEE0034846B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		551A434C26E1CDEE0034846B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		551A434F26E1CDEE0034846B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		551A435126E1CDF00034846B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		551A435426E1CDF00034846B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +53,10 @@
 		551A436626E1CDF00034846B /* MemeMatchupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMatchupUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		551A436A26E1CDF00034846B /* MemeMatchupUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMatchupUITests.swift; sourceTree = "<group>"; };
 		551A436C26E1CDF00034846B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		551A437E26E1DDE50034846B /* MemeCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeCreationViewController.swift; sourceTree = "<group>"; };
+		551A438326E1DDFD0034846B /* RoundStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundStartViewController.swift; sourceTree = "<group>"; };
+		551A438826E1DE0A0034846B /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		551A438D26E1DE160034846B /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +109,12 @@
 			children = (
 				551A434826E1CDEE0034846B /* AppDelegate.swift */,
 				551A434A26E1CDEE0034846B /* SceneDelegate.swift */,
-				551A434C26E1CDEE0034846B /* ViewController.swift */,
+				551A434C26E1CDEE0034846B /* HomeViewController.swift */,
 				551A434E26E1CDEE0034846B /* Main.storyboard */,
+				551A437E26E1DDE50034846B /* MemeCreationViewController.swift */,
+				551A438326E1DDFD0034846B /* RoundStartViewController.swift */,
+				551A438826E1DE0A0034846B /* ResultsViewController.swift */,
+				551A438D26E1DE160034846B /* ScoreBoardViewController.swift */,
 				551A435126E1CDF00034846B /* Assets.xcassets */,
 				551A435326E1CDF00034846B /* LaunchScreen.storyboard */,
 				551A435626E1CDF00034846B /* Info.plist */,
@@ -258,9 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				551A434D26E1CDEE0034846B /* ViewController.swift in Sources */,
+				551A438426E1DDFD0034846B /* RoundStartViewController.swift in Sources */,
+				551A434D26E1CDEE0034846B /* HomeViewController.swift in Sources */,
 				551A434926E1CDEE0034846B /* AppDelegate.swift in Sources */,
+				551A438E26E1DE160034846B /* ScoreBoardViewController.swift in Sources */,
+				551A437F26E1DDE60034846B /* MemeCreationViewController.swift in Sources */,
 				551A434B26E1CDEE0034846B /* SceneDelegate.swift in Sources */,
+				551A438926E1DE0A0034846B /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
