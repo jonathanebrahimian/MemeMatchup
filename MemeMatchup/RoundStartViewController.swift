@@ -13,7 +13,7 @@ class RoundStartViewController: UIViewController {
     @IBOutlet weak var playerNameLabel: UILabel!
     var players:[String] = [];
     var round_count = 0;
-    var curr_player = -1;
+    var curr_player = 0;
     var url = "";
     var timer:Timer?
     var timeLeft = 3
@@ -23,6 +23,7 @@ class RoundStartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         timerLabel.isHidden = true;
+        
         timerLabel.text = "\(timeLeft) seconds left";
         playerNameLabel.text = players[curr_player];
         
@@ -38,6 +39,7 @@ class RoundStartViewController: UIViewController {
                 let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
                 let data = json["data"]!;
                 let memes = data["memes"] as? [Any];
+                
                 let meme = memes![Int.random(in:0...memes!.count)] as! Dictionary<String, Any>
                 self.url = meme["url"] as! String;
                 
