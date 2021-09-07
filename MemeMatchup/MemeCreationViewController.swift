@@ -116,8 +116,8 @@ class MemeCreationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? RoundCollectionViewController{
             vc.numberOfPlayers = self.num_players;
-            vc.numRounds = numRounds;
-            vc.currRound = currRounds;
+//            vc.numRounds = numRounds;
+//            vc.currRound = currRounds;
 //            vc.round_count = round;
         }
     }
