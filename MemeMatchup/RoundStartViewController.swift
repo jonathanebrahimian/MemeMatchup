@@ -13,15 +13,21 @@ class RoundStartViewController: UIViewController {
     @IBOutlet weak var playerNameLabel: UILabel!
     var players:[String] = [];
     var round_count = 0;
-    var curr_player = -1;
+    var currRound = 1;
+    var curr_player = 0;
     var url = "";
     var timer:Timer?
     var timeLeft = 3
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var readyButton: UIButton!
+    
+    @IBOutlet weak var roundLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        roundLabel.text = "Round: " + String(currRound);
         timerLabel.isHidden = true;
         timerLabel.text = "\(timeLeft) seconds left";
         playerNameLabel.text = players[curr_player];
@@ -79,6 +85,8 @@ class RoundStartViewController: UIViewController {
             vc.meme_url = self.url;
             vc.curr_player = self.curr_player;
             vc.num_players = self.players.count;
+            vc.numRounds = round_count;
+            vc.currRounds = currRound;
         }
     }
     

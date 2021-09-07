@@ -11,6 +11,7 @@ class ResultsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("I AM HERE")
 
         // Do any additional setup after loading the view.
     }

@@ -18,6 +18,8 @@ class MemeCreationViewController: UIViewController {
     var meme_url:String = "";
     var curr_player = 0;
     var num_players = 0;
+    var numRounds = 1;
+    var currRounds = 1;
     override func viewDidLoad() {
         super.viewDidLoad()
         memeImage.downloaded(from:meme_url);
@@ -36,7 +38,21 @@ class MemeCreationViewController: UIViewController {
         if self.curr_player <   self.num_players-1 {
             navigationController?.popViewController(animated: false)
         }else{
-            performSegue(withIdentifier: "goToResults", sender: nil)
+            print("CLICKED")
+            print(curr_player)
+            print(num_players)
+//            performSegue(withIdentifier: "RoundResult", sender: nil)
+
+
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? RoundCollectionViewController{
+            vc.numberOfPlayers = self.num_players;
+            vc.numRounds = numRounds;
+            vc.currRound = currRounds;
+//            vc.round_count = round;
         }
     }
     /*
@@ -70,4 +86,6 @@ extension UIImageView {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
     }
+    
+
 }
