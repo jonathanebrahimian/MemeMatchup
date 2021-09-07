@@ -15,8 +15,22 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
     
     var players:[String] = [];
     
+    var round:Int = 1;
+//    default round is 1
+    
+    
     @IBOutlet weak var addPlayerButton: UIButton!
     
+    @IBOutlet weak var valueLabel: UILabel!
+    
+    @IBOutlet weak var stepper: UIStepper!
+    
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        valueLabel.text = Int(sender.value).description;
+        round = Int(Int(sender.value).description) ?? 1;
+//        here we store the round number
+//        if it is nil or invalid, use 1 as default
+    }
     @IBOutlet weak var playerTable: UITableView!
     @IBOutlet weak var namePicker: UIPickerView!
     override func viewDidLoad() {
@@ -26,6 +40,7 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         namePicker.dataSource = self;
         playerTable.delegate = self;
         playerTable.dataSource = self;
+        stepper.autorepeat = true;
         // Do any additional setup after loading the view.
     }
     @IBAction func addPlayerClicked(_ sender: Any) {
@@ -85,7 +100,8 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? RoundStartViewController{
             vc.players = self.players;
-            vc.round_count = 0;
+            vc.round_count = round;
+            
         }
     }
 
