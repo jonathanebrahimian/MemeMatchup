@@ -4,18 +4,13 @@
 //
 //  Created by Zhengran Jiang on 9/6/21.
 //question asked:
-//how to perform segue programatically
-//how to get index from button press in collection view cell
-//how to make rounds loop
-//make label above collectionviewcell
 
 import UIKit
 
 private let reuseIdentifier = "cellId"
-
+private var testarr = ["test","test2","test3"];
+private var ind = 0;
 class RoundCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    
 
     
     @IBAction func winClick(_ sender: UIButton) {
@@ -91,10 +86,17 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
-        let imageName = "test.jpeg"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        var imageName = ""
+        if (ind < testarr.count){
+            imageName = testarr[ind]
+            ind = ind+1
+            let image = UIImage(named: imageName)
+            let imageView = UIImageView(image: image!)
+            imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+            cell.addSubview(imageView)
+        }
+        
+        
         
 //        cell.backgroundColor = UIColor.red;
 //        let roundLabel = UILabel(frame: CGRect(x:80,y:40,width: 40,height: 40))
@@ -112,7 +114,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         winBtn.titleLabel?.textColor = UIColor.white;
         
         winBtn.addTarget(self, action: #selector(winClick(_:)), for: UIControl.Event.touchUpInside)
-        cell.addSubview(imageView)
+        
         cell.addSubview(winBtn);
         
 //        cell.addSubview(roundLabel);
