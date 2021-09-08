@@ -26,7 +26,10 @@ class MemeRoundsModel
         set {
             if newValue > numOfRounds
             {
-                // download more memes
+                for _ in 1...(newValue-numOfRounds)
+                {
+                    currentMemes.append(getMemeWithoutReplacement())
+                }
             }
             
             _numOfRounds = newValue
@@ -138,12 +141,17 @@ class MemeRoundsModel
         return UIImage(data: data!)!
      }
     
+    func getMemeWithoutReplacement() -> String
+    {
+        let randomIndex = Int.random(in: 1..<memeURLs.count)
+        memeURLs.removeValue(forKey: Array(memeURLs.keys)[randomIndex])
+        return Array(memeURLs.values)[randomIndex]
+    }
+    
     func newGame() {
         for _ in 1...numOfRounds
         {
-            let randomIndex = Int.random(in: 1..<memeURLs.count)
-            currentMemes.append(Array(memeURLs.values)[randomIndex])
-            memeURLs.removeValue(forKey: Array(memeURLs.keys)[randomIndex])
+            currentMemes.append(getMemeWithoutReplacement())
         }
         
         rounds.removeAll()
