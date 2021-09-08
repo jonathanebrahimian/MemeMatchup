@@ -10,6 +10,7 @@ import UIKit
 
 struct CaptionedMeme {
     var meme: String
+    var playerName: String
     var topLabel: UILabel
     var bottomLabel: UILabel
     var isWinner: Bool = false
@@ -79,9 +80,9 @@ class MemeRoundsModel
         newGame()
     }
     
-    func storeMeme(meme: String, topText: UILabel, bottomText: UILabel, user: String, round: Int)
+    func storeMeme(meme: String, playerName: String, topText: UILabel, bottomText: UILabel, user: String, round: Int)
     {
-        rounds[round - 1][user] = CaptionedMeme(meme: meme, topLabel: topText, bottomLabel: bottomText)
+        rounds[round - 1][user] = CaptionedMeme(meme: meme, playerName: playerName, topLabel: topText, bottomLabel: bottomText)
     }
     
     func addPlayer(name: String)
