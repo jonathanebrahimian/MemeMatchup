@@ -19,6 +19,7 @@
 		551A438426E1DDFD0034846B /* RoundStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A438326E1DDFD0034846B /* RoundStartViewController.swift */; };
 		551A438926E1DE0A0034846B /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A438826E1DE0A0034846B /* ResultsViewController.swift */; };
 		551A438E26E1DE160034846B /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A438D26E1DE160034846B /* ScoreBoardViewController.swift */; };
+		8EF49C1D26E91C030083E4E1 /* MemeRoundsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF49C1C26E91C030083E4E1 /* MemeRoundsModel.swift */; };
 		AB38440E26E6A2B30021E2FB /* RoundCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB38440D26E6A2B30021E2FB /* RoundCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		551A438326E1DDFD0034846B /* RoundStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundStartViewController.swift; sourceTree = "<group>"; };
 		551A438826E1DE0A0034846B /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		551A438D26E1DE160034846B /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
+		8EF49C1C26E91C030083E4E1 /* MemeRoundsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeRoundsModel.swift; sourceTree = "<group>"; };
 		AB38440D26E6A2B30021E2FB /* RoundCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 				551A434C26E1CDEE0034846B /* HomeViewController.swift */,
 				551A434E26E1CDEE0034846B /* Main.storyboard */,
 				AB38440D26E6A2B30021E2FB /* RoundCollectionViewController.swift */,
+				8EF49C1C26E91C030083E4E1 /* MemeRoundsModel.swift */,
 				551A437E26E1DDE50034846B /* MemeCreationViewController.swift */,
 				551A438326E1DDFD0034846B /* RoundStartViewController.swift */,
 				551A438826E1DE0A0034846B /* ResultsViewController.swift */,
@@ -280,6 +283,7 @@
 				551A438E26E1DE160034846B /* ScoreBoardViewController.swift in Sources */,
 				551A437F26E1DDE60034846B /* MemeCreationViewController.swift in Sources */,
 				551A434B26E1CDEE0034846B /* SceneDelegate.swift in Sources */,
+				8EF49C1D26E91C030083E4E1 /* MemeRoundsModel.swift in Sources */,
 				551A438926E1DE0A0034846B /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
