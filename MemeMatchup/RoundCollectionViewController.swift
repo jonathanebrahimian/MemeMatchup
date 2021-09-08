@@ -5,6 +5,7 @@
 //  Created by Zhengran Jiang on 9/6/21.
 //question asked:
 
+
 import UIKit
 
 private let reuseIdentifier = "cellId"
@@ -12,8 +13,6 @@ private let reuseIdentifier = "cellId"
 private var testarr = ["test","test2","test3"];
 private var ind = 0;
 class RoundCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    
     @IBAction func winClick(_ sender: UIButton) {
         print("win selected");
         let cell = sender.nearestAncestor(ofType: UICollectionViewCell.self);
@@ -35,6 +34,12 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         else{
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RoundStart") as? RoundStartViewController
             {
+                vc.currRound = currRound + 1;
+                vc.round_count = numRounds;
+//                vc players = all player name in memes
+//                we need to enter info again since its cleaned
+                //round goes up
+            
                 if let nav = navigationController{
                     nav.pushViewController(vc, animated: true)
                 }
@@ -43,16 +48,14 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
             }
             print("HERE")
         }
- 
-//        let result = ResultsViewController();
-//        DispatchQueue.main.async {
-//            self.navigationController?.pushViewController(result, animated: true)
-//        }
-       
-
     }
+//    var scr = UIScrollView();
+//    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+//        return self.image
+//    }
     
     var numberOfPlayers = 0;
+    
     var currRound = 1;
     var numRounds = 1;
     let cellId = "cellId";
@@ -105,6 +108,8 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         return CGSize(width: width, height: height)
     }
     
+    
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
         
@@ -117,8 +122,20 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
             ind = ind+1
             let image = UIImage(named: imageName)
             let imageView = UIImageView(image: image!)
+            
             imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-            cell.addSubview(imageView)
+            
+            
+            
+            var scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+//            scroll.backgroundColor = .systemTeal
+            scroll.contentSize = CGSize(width: scroll.contentSize.width, height: scroll.contentSize.height)
+            scroll.minimumZoomScale = 0.1
+            scroll.maximumZoomScale = 4
+//            scroll.delegate = self
+            scroll.addSubview(imageView)
+//            cell.addSubview(imageView)
+            cell.addSubview(scroll)
         }
         
         
@@ -193,3 +210,5 @@ extension UIView {
         return superview?.nearestAncestor(ofType: type)
     }
 }
+
+

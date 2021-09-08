@@ -103,13 +103,17 @@ class MemeCreationViewController: UIViewController {
     }
     
     @IBAction func doneCreatingMeme(_ sender: Any) {
-        if self.curr_player <   self.num_players-1 {
+        print(self.curr_player)
+        print(self.num_players)
+        if(self.curr_player <   self.num_players) {
             navigationController?.popViewController(animated: false)
+            
+            
         }else{
             print("CLICKED")
             print(curr_player)
             print(num_players)
-//            performSegue(withIdentifier: "RoundResult", sender: nil)
+            performSegue(withIdentifier: "GoToResults", sender: nil)
 
 
         }

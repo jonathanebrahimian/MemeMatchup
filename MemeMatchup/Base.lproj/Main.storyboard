@@ -187,7 +187,6 @@
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneCreatingMeme:" destination="hmE-0l-Muo" eventType="touchUpInside" id="eYe-QT-3ZG"/>
-                                    <segue destination="GBb-ub-Zyz" kind="show" identifier="RoundResult" id="JfY-OH-BMw"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Qo2-of-oNp">
@@ -244,6 +243,7 @@
                         <outlet property="timerLabel" destination="fMd-rj-21Y" id="lS6-aq-tm5"/>
                         <outlet property="topBottomSwitch" destination="liM-hy-xrw" id="8uc-oo-izf"/>
                         <outlet property="topLabel" destination="zWi-8W-6xJ" id="V5Q-y6-0gg"/>
+                        <segue destination="GBb-ub-Zyz" kind="show" identifier="GoToResults" id="4vm-c6-3cf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCd-Sh-VHL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
