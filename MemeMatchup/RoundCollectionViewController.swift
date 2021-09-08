@@ -8,6 +8,7 @@
 import UIKit
 
 private let reuseIdentifier = "cellId"
+//private var roundMeme = MemeRoundsModel.shared
 private var testarr = ["test","test2","test3"];
 private var ind = 0;
 class RoundCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -16,13 +17,33 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     @IBAction func winClick(_ sender: UIButton) {
         print("win selected");
         let cell = sender.nearestAncestor(ofType: UICollectionViewCell.self);
+        
         let indexPath = self.collectionView?.indexPath(for: cell!);
         print(indexPath);
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultView") as? ResultsViewController
-        {
-            present(vc, animated: true, completion: nil)
-    
+        if(currRound == numRounds){
+            //if we go through all rounds
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultView") as? ResultsViewController
+            {
+                if let nav = navigationController{
+                    nav.pushViewController(vc, animated: true)
+                }
+    //            self.present(vc, animated: true, completion: nil)
+        
+            }
+            print("JERE")
         }
+        else{
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RoundStart") as? RoundStartViewController
+            {
+                if let nav = navigationController{
+                    nav.pushViewController(vc, animated: true)
+                }
+    //            self.present(vc, animated: true, completion: nil)
+        
+            }
+            print("HERE")
+        }
+ 
 //        let result = ResultsViewController();
 //        DispatchQueue.main.async {
 //            self.navigationController?.pushViewController(result, animated: true)
@@ -86,9 +107,13 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
-        var imageName = ""
+        
         if (ind < testarr.count){
-            imageName = testarr[ind]
+//            var test = MemeRoundsModel.shared
+//            var temp = test.getPlayers()
+//            print(temp.count)
+            var imageName = ""
+            imageName = testarr[ind];
             ind = ind+1
             let image = UIImage(named: imageName)
             let imageView = UIImageView(image: image!)

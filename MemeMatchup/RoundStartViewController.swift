@@ -87,8 +87,8 @@ class RoundStartViewController: UIViewController {
             vc.meme_url = self.url;
             vc.curr_player = self.curr_player;
             vc.num_players = self.players.count;
-//            vc.numRounds = round_count;
-//            vc.currRounds = currRound;
+            vc.numRounds = round_count;
+            vc.currRound = currRound;
         }
     }
     

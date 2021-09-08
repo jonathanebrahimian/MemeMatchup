@@ -18,6 +18,8 @@ class MemeCreationViewController: UIViewController {
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var bottomLabel: UILabel!
     var player_name:String = "";
+    var numRounds = 1;
+    var currRound = 1;
     
     var meme_url:String = "";
     
@@ -116,8 +118,8 @@ class MemeCreationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? RoundCollectionViewController{
             vc.numberOfPlayers = self.num_players;
-//            vc.numRounds = numRounds;
-//            vc.currRound = currRounds;
+            vc.numRounds = numRounds;
+            vc.currRound = currRound;
 //            vc.round_count = round;
         }
     }
