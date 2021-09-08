@@ -39,10 +39,41 @@ class MemeRoundsModel
     private var rounds: [[String: CaptionedMeme]] = []
     private var gameWins: [String: Int] = [:]
     private var images: [String] = []
-    private var url: String = ""
+    private var memeURLs: [String: String] = [:]
+    private var currentMemes: [String] = []
     
     private init() {
-        // download images for numOfRounds
+        let params:Dictionary<String, String> = [:]
+        var request = URLRequest(url: URL(string: "https://api.imgflip.com/get_memes")!)
+        request.httpMethod = "GET"
+        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+                
+                let data = json["data"] as! Dictionary<String, Array<Dictionary<String, AnyObject>>>
+                
+                let memes = data["memes"]!
+                
+                for meme in memes {
+                    if meme["box_count"] as! Int == 2
+                    {
+                        self.memeURLs[meme["name"] as! String] = (meme["url"] as! String)
+                    }
+                }
+                
+                print(self.memeURLs)
+            } catch {
+                print("error")
+            }
+        })
+
+        task.resume()
+        
+        newGame()
     }
     
     func storeMeme(meme: String, topText: UILabel, bottomText: UILabel, user: String, round: Int)
@@ -102,10 +133,19 @@ class MemeRoundsModel
         return rounds[round]
     }
     
-    // func getImageFromName(name: String) -> UIImage {}
+     func getImageFromName(name: String) -> UIImage {
+        let data = try? Data(contentsOf: URL(string: memeURLs[currentMemes[currentRound - 1]]!)!)
+        return UIImage(data: data!)!
+     }
     
     func newGame() {
-        // download new memes
+        for _ in 1...numOfRounds
+        {
+            let randomIndex = Int.random(in: 1..<memeURLs.count)
+            currentMemes.append(Array(memeURLs.values)[randomIndex])
+            memeURLs.removeValue(forKey: Array(memeURLs.keys)[randomIndex])
+        }
+        
         rounds.removeAll()
         currentRound = 1
     }
