@@ -8,11 +8,15 @@
 import UIKit
 
 
-class MemeCreationViewController: UIViewController {
+class MemeCreationViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var memeImage: UIImageView!
+    lazy private var memeImage: UIImageView? = {
+        return UIImageView.init(image: nil)
+    }()
+    
     @IBOutlet weak var memeTextField: UITextField!
     
+    @IBOutlet weak var memeScrollView: UIScrollView!
     @IBOutlet weak var colorPicker: UISegmentedControl!
     @IBOutlet weak var topBottomSwitch: UISwitch!
     @IBOutlet weak var fontSizeSlider: UISlider!
@@ -34,7 +38,7 @@ class MemeCreationViewController: UIViewController {
     var timer:Timer?;
     override func viewDidLoad() {
         super.viewDidLoad()
-        memeImage.downloaded(from:meme_url);
+        memeImage!.downloaded(from:meme_url);
         fontSizeSlider.value = 17;
         topBottomSwitch.isOn = editing_bottom;
         topLabel.textColor = colors[0];
@@ -43,13 +47,19 @@ class MemeCreationViewController: UIViewController {
         timerLabel.text = "\(timeLeft) seconds left";
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true);
         
+        memeTextField.delegate = self;
+        self.memeScrollView.addSubview(self.memeImage!)
+        
         // Do any additional setup after loading the view.
     }
     
     @objc func onTimerFires()
     {
         timeLeft -= 1
-        timerLabel.text = "\(timeLeft) seconds left"
+        DispatchQueue.main.async{
+            self.timerLabel.text = "\(self.timeLeft) seconds left"
+        }
+        
 
         if timeLeft <= 0 {
             timer?.invalidate()
@@ -61,11 +71,18 @@ class MemeCreationViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder();
+        return true
+    }
     
 
     @IBAction func memeTextChange(_ sender: Any) {
         let labelEditing = getCorrectLabel();
-        labelEditing.text = memeTextField.text
+        DispatchQueue.main.async{
+            labelEditing.text = self.memeTextField.text
+        }
     }
     
     func getCorrectLabel() -> UILabel{

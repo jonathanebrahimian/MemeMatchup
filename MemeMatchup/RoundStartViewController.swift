@@ -68,7 +68,9 @@ class RoundStartViewController: UIViewController {
     @objc func onTimerFires()
     {
         timeLeft -= 1
-        timerLabel.text = "\(timeLeft) seconds left"
+        DispatchQueue.main.async {
+            self.timerLabel.text = "\(self.timeLeft) seconds left"
+        }
 
         if timeLeft <= 0 {
             timer?.invalidate()
