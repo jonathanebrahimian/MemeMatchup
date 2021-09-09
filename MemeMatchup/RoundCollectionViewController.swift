@@ -125,19 +125,63 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
         
-        if (ind < MemeRoundsModel.shared.getPlayers().count){
+        // get memes with captions
+        let roundMemes = MemeRoundsModel.shared.getCaptionedMemesForRound(round: MemeRoundsModel.shared.currentRound)
+        
+        // Set the imageview
+        let imageView: UIImageView = UIImageView()
+        imageView.image = MemeRoundsModel.shared.getImageFromURL(url_string: MemeRoundsModel.shared.getCurrentMemeURL())
+        
+        print("ROUND MEMES:")
+        print(roundMemes)
+        
+        // Set the toptext
+        let topLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.topLabel
+        
+        // Set the bottomtext
+        let bottomLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.bottomLabel
+        
+        // Create the button
+        let winBtn = UIButton(frame: CGRect(x:0,y:20,width: 70,height: 50));
+        winBtn.backgroundColor = UIColor(red: 2/255, green: 117/255, blue: 216/255, alpha: 1)
 
+        winBtn.layer.cornerRadius = 5;
+        winBtn.layer.borderWidth = 1;
+    
+        winBtn.setTitle("win", for: .normal)
+        winBtn.titleLabel?.textColor = UIColor.white;
+        
+        winBtn.addTarget(self, action: #selector(winClick(_:)), for: UIControl.Event.touchUpInside)
+        
+        // Set positions
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        topLabel.frame = CGRect(x:view.frame.width/2, y: view.frame.height/8, width: imageView.frame.size.width, height:20)
+        
+        bottomLabel.frame = CGRect(x:view.frame.width/2, y: view.frame.height*3/4, width: imageView.frame.size.width, height:20)
+        
+        // Add everything to cell
+        imageView.addSubview(topLabel)
+        imageView.addSubview(bottomLabel)
+        cell.addSubview(imageView)
+        cell.addSubview(winBtn);
+        
+        return cell
+        
+        // OLD CODE
+        /*if (ind < MemeRoundsModel.shared.getPlayers().count){
+            
             print("sHARED")
-//            print(MemeRoundsModel.shared.getPlayers())
-//            var dict = MemeRoundsModel.shared.getCaptionedMemesForRound(round: MemeRoundsModel.shared.currentRound-1);
+            //            print(MemeRoundsModel.shared.getPlayers())
+            //            var dict = MemeRoundsModel.shared.getCaptionedMemesForRound(round: MemeRoundsModel.shared.currentRound-1);
             var dict = MemeRoundsModel.shared.getCaptionedMemesForRound(round: ind);
-//            current round start at 1 so -1
+            //            current round start at 1 so -1
             var playernames = MemeRoundsModel.shared.getPlayers()
-           
+            
             var player = playernames[ind]
             print(dict[player]?.meme_url)
             
-//            var img = arr[ind];
+            //            var img = arr[ind];
             print("Dict")
             print(dict)
             print("IND")
@@ -157,42 +201,16 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
                 imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
                 var topLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height/8, width: imageView.frame.size.width, height:20))
                 topLabel = dict[player]!.topLabel
-    //            topLabel.backgroundColor = UIColor.white
+                //            topLabel.backgroundColor = UIColor.white
                 imageView.addSubview(topLabel);
                 
                 var botLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height*3/4, width: imageView.frame.size.width, height:20))
                 botLabel = dict[player]!.bottomLabel
-    //            topLabel.backgroundColor = UIColor.white
+                //            topLabel.backgroundColor = UIColor.white
                 imageView.addSubview(botLabel);
                 cell.addSubview(imageView)
             }
-            
-
-//            imageView.translatesAutoresizingMaskIntoConstraints = false;
-//            NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
-//                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
-//                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100).isActive = true
-//                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100).isActive = true
-            
-            
-//            var scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-////            scroll.backgroundColor = .systemTeal
-//            scroll.contentSize = CGSize(width: scroll.contentSize.width, height: scroll.contentSize.height)
-//            scroll.minimumZoomScale = 0.1
-//            scroll.maximumZoomScale = 4
-////            scroll.delegate = self
-//            scroll.addSubview(imageView)
-////            cell.addSubview(imageView)
-//            cell.addSubview(scroll)
         }
-        
-        
-        
-//        cell.backgroundColor = UIColor.red;
-//        let roundLabel = UILabel(frame: CGRect(x:80,y:40,width: 40,height: 40))
-//        roundLabel.text = "Round: " + String(currRound);
-//        roundLabel.backgroundColor = UIColor.white;
-//        roundLabel.frame = CGRect(x:80,y:40,width: roundLabel.intrinsicContentSize.width,height:roundLabel.intrinsicContentSize.height)
         
         let winBtn = UIButton(frame: CGRect(x:0,y:20,width: 70,height: 50));
         winBtn.backgroundColor = UIColor(red: 2/255, green: 117/255, blue: 216/255, alpha: 1)
@@ -208,7 +226,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         cell.addSubview(winBtn);
         
 //        cell.addSubview(roundLabel);
-        return cell;
+        return cell;*/
     }
 
 //    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
