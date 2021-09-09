@@ -37,7 +37,7 @@ class MemeCreationViewController: UIViewController {
         super.viewDidLoad()
         
         // set image
-        memeImage.image = MemeRoundsModel.shared.getImageFromName(name: MemeRoundsModel.shared.getCurrentMeme());
+        memeImage.image = MemeRoundsModel.shared.getImageFromURL(url_string: MemeRoundsModel.shared.getCurrentMemeURL());
         
         // font size
         fontSizeSlider.value = 17;
@@ -61,7 +61,6 @@ class MemeCreationViewController: UIViewController {
         if timeLeft <= 0 {
             timer?.invalidate()
             timer = nil
-            
             
             timeLeft = 3
             doneCreatingMeme((Any).self);
@@ -108,6 +107,8 @@ class MemeCreationViewController: UIViewController {
     }
     
     @IBAction func doneCreatingMeme(_ sender: Any) {
+        MemeRoundsModel.shared.storeCaptions(forPlayer: MemeRoundsModel.shared.getCurrentPlayer(), topText: topLabel, bottomText: bottomLabel)
+        
         if(MemeRoundsModel.shared.nextPlayer()) {
             print("Going to next player...")
             navigationController?.popViewController(animated: false)

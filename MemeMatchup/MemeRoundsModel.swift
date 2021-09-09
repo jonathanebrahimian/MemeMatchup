@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct CaptionedMeme {
-    var meme: String
+    var meme_url: String
     var playerName: String
     var topLabel: UILabel
     var bottomLabel: UILabel
@@ -55,7 +55,7 @@ class MemeRoundsModel: NSObject
         request.httpMethod = "GET"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
+        
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             do {
@@ -78,13 +78,8 @@ class MemeRoundsModel: NSObject
                 print("error")
             }
         })
-
+        
         task.resume()
-    }
-    
-    func storeMeme(meme: String, playerName: String, topText: UILabel, bottomText: UILabel, user: String, round: Int)
-    {
-        rounds[round - 1][user] = CaptionedMeme(meme: meme, playerName: playerName, topLabel: topText, bottomLabel: bottomText)
     }
     
     func addPlayer(name: String)
@@ -158,15 +153,15 @@ class MemeRoundsModel: NSObject
         return rounds[round]
     }
     
-     func getImageFromName(name: String) -> UIImage {
-        print("Attempting to download image \"\(name)\"...")
+    func getImageFromURL(url_string: String) -> UIImage {
+        print("Attempting to download image \"\(url_string)\"...")
         
-        let url = URL(string: name)
+        let url = URL(string: url_string)
         let data = try? Data(contentsOf: url!)
         return UIImage(data: data!)!
-     }
+    }
     
-    func getCurrentMeme() -> String {
+    func getCurrentMemeURL() -> String {
         return currentMemes[currentRound - 1]
     }
     
@@ -176,6 +171,13 @@ class MemeRoundsModel: NSObject
         let randomIndex = Int.random(in: 1...(memeURLs.count - 1))
         memeURLs.removeValue(forKey: Array(memeURLs.keys)[randomIndex])
         return Array(memeURLs.values)[randomIndex]
+    }
+    
+    func storeCaptions(forPlayer: String, topText: UILabel, bottomText: UILabel)
+    {
+        print("Storing meme for player \"\(forPlayer)\" with captions: \n\t\(String( topText.text!)) \n\t\(String(bottomText.text!))")
+        
+        rounds.append([forPlayer : CaptionedMeme(meme_url: getCurrentMemeURL(), playerName: forPlayer, topLabel: topText, bottomLabel: bottomText)])
     }
     
     func newGame() {
