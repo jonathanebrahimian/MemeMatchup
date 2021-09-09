@@ -3,14 +3,15 @@
 //  MemeMatchup
 //
 //  Created by Zhengran Jiang on 9/6/21.
-//question asked:
+//question ask:
 
+//current bugs:
+//multiple rounds go out of bounds at ind
+//declare winner abnormal
 
 import UIKit
 
 private let reuseIdentifier = "cellId"
-//private var roundMeme = MemeRoundsModel.shared
-private var testarr = ["test","test2","test3"];
 private var ind = 0;
 class RoundCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBAction func winClick(_ sender: UIButton) {
@@ -19,9 +20,16 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         
         let indexPath = self.collectionView?.indexPath(for: cell!);
         print(indexPath);
+        
+        var playernames = MemeRoundsModel.shared.getPlayers()
+        var player = playernames[indexPath!.row]
+        MemeRoundsModel.shared.declareWinner(winner: player)
 //        let name = MemeRoundsModel.shared.getCaptionedMemesForRound(round: currRound)[indexPath];
 //        MemeRoundsModel.shared.declareWinner(winner: name)
-        if(currRound == numRounds){
+        print("rounds")
+        print(MemeRoundsModel.shared.currentRound)
+        print(MemeRoundsModel.shared.numOfRounds)
+        if(MemeRoundsModel.shared.currentRound > MemeRoundsModel.shared.numOfRounds){
             //if we go through all rounds
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultView") as? ResultsViewController
             {
@@ -36,9 +44,11 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         else{
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RoundStart") as? RoundStartViewController
             {
-                vc.currRound = currRound + 1;
-                vc.round_count = numRounds;
-                vc.players = ["AAA","AAB"]
+//                MemeRoundsModel.shared.incRound();
+//                increase round by 1
+//                vc.currRound = currRound + 1;
+//                vc.round_count = numRounds;
+//                vc.players = ["AAA","AAB"]
 //                vc players = all player name in memes
 //                we need to enter info again since its cleaned
                 //round goes up
@@ -56,12 +66,9 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
 //    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
 //        return self.image
 //    }
-    
-    lazy var numberOfPlayers = 2;
-    
-    lazy var currRound = 1;
-    lazy var numRounds = 1;
+
     let cellId = "cellId";
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -100,7 +107,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return numberOfPlayers;
+        return MemeRoundsModel.shared.getPlayers().count;
     }
     
     
@@ -118,29 +125,49 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
         
-        if (ind < testarr.count){
+        if (ind < MemeRoundsModel.shared.getPlayers().count){
 
             print("sHARED")
-            print(MemeRoundsModel.shared.getPlayers())
-//            var arr = MemeRoundsModel.shared.getCaptionedMemesForRound(round: currRound-1);
+//            print(MemeRoundsModel.shared.getPlayers())
+//            var dict = MemeRoundsModel.shared.getCaptionedMemesForRound(round: MemeRoundsModel.shared.currentRound-1);
+            var dict = MemeRoundsModel.shared.getCaptionedMemesForRound(round: ind);
+//            current round start at 1 so -1
+            var playernames = MemeRoundsModel.shared.getPlayers()
+           
+            var player = playernames[ind]
+            print(dict[player]?.meme_url)
             
-            print("arr")
+//            var img = arr[ind];
+            print("Dict")
+            print(dict)
+            print("IND")
+            print(ind)
+            print("player")
+            print(player)
             var imageName = ""
-            imageName = testarr[ind];
+            imageName = dict[player]!.meme_url;
+            print(imageName)
             ind = ind+1
-            let image = UIImage(named: imageName)
-            let imageView = UIImageView(image: image!)
+            var url = URL(string: imageName)
             
-            imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-            var topLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height/8, width: imageView.frame.size.width, height:20))
-            topLabel.text = "HELLO";
-//            topLabel.backgroundColor = UIColor.white
-            imageView.addSubview(topLabel);
+            if let data = try? Data(contentsOf: url!)
+            {
+                let image: UIImage = UIImage(data: data)!
+                let imageView = UIImageView(image: image)
+                imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+                var topLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height/8, width: imageView.frame.size.width, height:20))
+                topLabel = dict[player]!.topLabel
+    //            topLabel.backgroundColor = UIColor.white
+                imageView.addSubview(topLabel);
+                
+                var botLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height*3/4, width: imageView.frame.size.width, height:20))
+                botLabel = dict[player]!.bottomLabel
+    //            topLabel.backgroundColor = UIColor.white
+                imageView.addSubview(botLabel);
+                cell.addSubview(imageView)
+            }
             
-            var botLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height*3/4, width: imageView.frame.size.width, height:20))
-            botLabel.text = "HELLO";
-//            topLabel.backgroundColor = UIColor.white
-            imageView.addSubview(botLabel);
+
 //            imageView.translatesAutoresizingMaskIntoConstraints = false;
 //            NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
 //                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
@@ -148,15 +175,15 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
 //                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100).isActive = true
             
             
-            var scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//            scroll.backgroundColor = .systemTeal
-            scroll.contentSize = CGSize(width: scroll.contentSize.width, height: scroll.contentSize.height)
-            scroll.minimumZoomScale = 0.1
-            scroll.maximumZoomScale = 4
-//            scroll.delegate = self
-            scroll.addSubview(imageView)
-//            cell.addSubview(imageView)
-            cell.addSubview(scroll)
+//            var scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+////            scroll.backgroundColor = .systemTeal
+//            scroll.contentSize = CGSize(width: scroll.contentSize.width, height: scroll.contentSize.height)
+//            scroll.minimumZoomScale = 0.1
+//            scroll.maximumZoomScale = 4
+////            scroll.delegate = self
+//            scroll.addSubview(imageView)
+////            cell.addSubview(imageView)
+//            cell.addSubview(scroll)
         }
         
         

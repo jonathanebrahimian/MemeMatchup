@@ -38,7 +38,7 @@ class MemeRoundsModel: NSObject
         }
     }
     
-    private var _numOfRounds: Int = 3
+    private var _numOfRounds: Int = 1
     private var playerNames: [String] = []
     private var rounds: [[String: CaptionedMeme]] = []
     private var gameWins: [String: Int] = [:]
@@ -183,6 +183,7 @@ class MemeRoundsModel: NSObject
     func newGame() {
         currentPlayerIndex = 0
         currentMemes.removeAll()
+        playerNames.removeAll()
         
         for _ in 1...numOfRounds
         {
@@ -216,6 +217,8 @@ class MemeRoundsModel: NSObject
         
         gameWins[winner, default: 0] += 1
         
-        newGame()
+//        newGame()
     }
+    
+ 
 }
