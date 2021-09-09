@@ -294,25 +294,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Results View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crG-W0-PTJ">
-                                <rect key="frame" x="119" y="94" width="177" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CCC - 1 Vote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km1-kx-uYt">
+                                <rect key="frame" x="20" y="491" width="374" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="9Ih-II-5wY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HELLO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-FT-fXX">
-                                <rect key="frame" x="161" y="299" width="92" height="126"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BBB - 2 Votes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BaI-Og-ecv">
+                                <rect key="frame" x="148.5" y="418" width="117.5" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="fUc-oB-wBp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👑 AAA - 3 Votes!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GeR-Bu-Ih0">
+                                <rect key="frame" x="20" y="340" width="374" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="xHx-hK-g3R"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gft-9v-7ae">
+                                <rect key="frame" x="150.5" y="828" width="113" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Back to Home"/>
+                                <connections>
+                                    <action selector="onBackToHome:" destination="AmA-s2-itK" eventType="touchUpInside" id="RiT-f7-GGS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Y71-F2-HI2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GeR-Bu-Ih0" firstAttribute="leading" secondItem="Y71-F2-HI2" secondAttribute="leading" constant="20" id="0RH-lM-T74"/>
+                            <constraint firstItem="BaI-Og-ecv" firstAttribute="top" secondItem="GeR-Bu-Ih0" secondAttribute="bottom" constant="8" symbolic="YES" id="2WK-8b-AKk"/>
+                            <constraint firstItem="BaI-Og-ecv" firstAttribute="centerX" secondItem="Y71-F2-HI2" secondAttribute="centerX" id="2gJ-SZ-l4H"/>
+                            <constraint firstItem="BaI-Og-ecv" firstAttribute="centerY" secondItem="Y71-F2-HI2" secondAttribute="centerY" id="3nN-ij-Q9S"/>
+                            <constraint firstItem="km1-kx-uYt" firstAttribute="leading" secondItem="GeR-Bu-Ih0" secondAttribute="leading" id="6pJ-em-ttp"/>
+                            <constraint firstItem="km1-kx-uYt" firstAttribute="top" secondItem="BaI-Og-ecv" secondAttribute="bottom" constant="3" id="D1Y-83-UPa"/>
+                            <constraint firstItem="gft-9v-7ae" firstAttribute="centerX" secondItem="Y71-F2-HI2" secondAttribute="centerX" id="ETN-XY-eIc"/>
+                            <constraint firstItem="gft-9v-7ae" firstAttribute="bottom" secondItem="Y71-F2-HI2" secondAttribute="bottom" id="OjF-4d-2NP"/>
+                            <constraint firstItem="GeR-Bu-Ih0" firstAttribute="centerX" secondItem="BaI-Og-ecv" secondAttribute="centerX" id="bCj-Cv-3m4"/>
+                            <constraint firstItem="km1-kx-uYt" firstAttribute="trailing" secondItem="GeR-Bu-Ih0" secondAttribute="trailing" id="zu0-c3-UWg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sEu-ba-vRv"/>
+                    <connections>
+                        <outlet property="firstPlaceLabel" destination="GeR-Bu-Ih0" id="y05-3B-wAh"/>
+                        <outlet property="secondPlaceLabel" destination="BaI-Og-ecv" id="fW4-Px-8LV"/>
+                        <outlet property="thirdPlaceLabel" destination="km1-kx-uYt" id="lXS-JB-KjG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBd-L3-38N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
