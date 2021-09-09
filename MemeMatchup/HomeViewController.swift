@@ -9,30 +9,24 @@ import UIKit
 
 class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate,UITableViewDataSource {
 
-
-    
     lazy var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
     
-    var players:[String] = [];
-    
-    var round:Int = 1;
-//    default round is 1
-    
+//    var players:[String] = [];
+//    var round:Int = MemeRoundsModel.shared.numOfRounds;
     
     @IBOutlet weak var addPlayerButton: UIButton!
-    
     @IBOutlet weak var valueLabel: UILabel!
-    
     @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var playerTable: UITableView!
+    @IBOutlet weak var namePicker: UIPickerView!
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         valueLabel.text = Int(sender.value).description;
-        round = Int(Int(sender.value).description) ?? 1;
-//        here we store the round number
-//        if it is nil or invalid, use 1 as default
+        MemeRoundsModel.shared.numOfRounds = Int(Int(sender.value).description) ?? 1;
+        //        here we store the round number
+        //        if it is nil or invalid, use 1 as default
     }
-    @IBOutlet weak var playerTable: UITableView!
-    @IBOutlet weak var namePicker: UIPickerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         namePicker.isHidden = true
@@ -47,19 +41,29 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
     }
     @IBAction func addPlayerClicked(_ sender: Any) {
         if namePicker.isHidden{
-            self.players.append("AAA");
-            DispatchQueue.main.async { [weak self] in
-              //Reloading the tableview after ALL values appended.
-              self?.playerTable.reloadData()
-            }
             namePicker.isHidden = false
+            
             namePicker.selectRow(0, inComponent: 0, animated: true);
             namePicker.selectRow(0, inComponent: 1, animated: true);
             namePicker.selectRow(0, inComponent: 2, animated: true);
+            
             addPlayerButton.setTitle("Done", for: .normal);
         }else{
-            namePicker.isHidden = true
-            addPlayerButton.setTitle("Add Player", for: .normal);
+            DispatchQueue.main.async { [weak self] in
+                //Reloading the tableview after ALL values appended.
+                self?.playerTable.reloadData()
+            }
+            
+            let newPlayer: String = letters[namePicker.selectedRow(inComponent: 0)] + letters[namePicker.selectedRow(inComponent: 1)] + letters[namePicker.selectedRow(inComponent: 2)]
+            
+            if !MemeRoundsModel.shared.getPlayers().contains(newPlayer)
+            {
+                print("Adding player \(newPlayer)")
+                MemeRoundsModel.shared.addPlayer(name: newPlayer)
+                
+                namePicker.isHidden = true
+                addPlayerButton.setTitle("Add Player", for: .normal);
+            }
         }
         
     }
@@ -77,36 +81,31 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let currString = players[players.count-1];
-        players[players.count-1] = String(currString.prefix(component) + letters[row] + currString.dropFirst(component+1));
+//        let currString = players[players.count-1];
+//        players[players.count-1] = String(currString.prefix(component) + letters[row] + currString.dropFirst(component+1));
         DispatchQueue.main.async { [weak self] in
-          //Reloading the tableview after ALL values appended.
-          self?.playerTable.reloadData()
+            //Reloading the tableview after ALL values appended.
+            self?.playerTable.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return players.count
+        return MemeRoundsModel.shared.getPlayers().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell",for: indexPath);
         
-        cell.textLabel!.text = self.players[indexPath.row]
+        cell.textLabel!.text = MemeRoundsModel.shared.getPlayers()[indexPath.row]
         
         return cell;
     }
     
-
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? RoundStartViewController{
-            vc.players = self.players;
-            vc.round_count = round;
-            
+        if let _ = segue.destination as? RoundStartViewController{
+//            vc.players = MemeRoundsModel.shared.getPlayers();
+//            vc.round_count = MemeRoundsModel.shared.numOfRounds;
         }
     }
-
-
 }
 
