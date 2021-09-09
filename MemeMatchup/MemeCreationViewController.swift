@@ -8,13 +8,13 @@
 import UIKit
 
 
-class MemeCreationViewController: UIViewController, UITextFieldDelegate {
+class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     lazy private var memeImage: UIImageView? = {
-        return UIImageView.init(image: nil)
+        return UIImageView.init(image: MemeRoundsModel.shared.getImageFromURL(url_string: MemeRoundsModel.shared.getCurrentMemeURL()));
     }()
     
-    @IBOutlet weak var memeImage: UIImageView!
+    
     @IBOutlet weak var memeTextField: UITextField!
     
     @IBOutlet weak var memeScrollView: UIScrollView!
@@ -42,8 +42,6 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // set image
-        memeImage.image = MemeRoundsModel.shared.getImageFromURL(url_string: MemeRoundsModel.shared.getCurrentMemeURL());
         
         // font size
         fontSizeSlider.value = 17;
@@ -59,9 +57,20 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true);
         
         memeTextField.delegate = self;
-        self.memeScrollView.addSubview(self.memeImage!)
-        
+        if let size = self.memeImage?.image?.size{
+            self.memeScrollView.addSubview(self.memeImage!);
+            self.memeScrollView.contentSize = size;
+            self.memeScrollView.minimumZoomScale = 0.1;
+            self.memeScrollView.delegate = self;
+            
+            
+        }
+
         // Do any additional setup after loading the view.
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.memeImage;
     }
     
     @objc func onTimerFires()
