@@ -19,6 +19,8 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         
         let indexPath = self.collectionView?.indexPath(for: cell!);
         print(indexPath);
+//        let name = MemeRoundsModel.shared.getCaptionedMemesForRound(round: currRound)[indexPath];
+//        MemeRoundsModel.shared.declareWinner(winner: name)
         if(currRound == numRounds){
             //if we go through all rounds
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultView") as? ResultsViewController
@@ -36,6 +38,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
             {
                 vc.currRound = currRound + 1;
                 vc.round_count = numRounds;
+                vc.players = ["AAA","AAB"]
 //                vc players = all player name in memes
 //                we need to enter info again since its cleaned
                 //round goes up
@@ -54,10 +57,10 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
 //        return self.image
 //    }
     
-    var numberOfPlayers = 0;
+    lazy var numberOfPlayers = 2;
     
-    var currRound = 1;
-    var numRounds = 1;
+    lazy var currRound = 1;
+    lazy var numRounds = 1;
     let cellId = "cellId";
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +69,8 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
+       
+        
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.contentInset = UIEdgeInsets(top: 50,left: 0,bottom: 0,right: 0);
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50,left: 0,bottom: 0,right: 0);
@@ -114,9 +119,12 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
         
         if (ind < testarr.count){
-//            var test = MemeRoundsModel.shared
-//            var temp = test.getPlayers()
-//            print(temp.count)
+
+            print("sHARED")
+            print(MemeRoundsModel.shared.getPlayers())
+//            var arr = MemeRoundsModel.shared.getCaptionedMemesForRound(round: currRound-1);
+            
+            print("arr")
             var imageName = ""
             imageName = testarr[ind];
             ind = ind+1
@@ -124,7 +132,20 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
             let imageView = UIImageView(image: image!)
             
             imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+            var topLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height/8, width: imageView.frame.size.width, height:20))
+            topLabel.text = "HELLO";
+//            topLabel.backgroundColor = UIColor.white
+            imageView.addSubview(topLabel);
             
+            var botLabel = UILabel(frame: CGRect(x:view.frame.width/2, y: view.frame.height*3/4, width: imageView.frame.size.width, height:20))
+            botLabel.text = "HELLO";
+//            topLabel.backgroundColor = UIColor.white
+            imageView.addSubview(botLabel);
+//            imageView.translatesAutoresizingMaskIntoConstraints = false;
+//            NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0).isActive = true
+//                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0).isActive = true
+//                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100).isActive = true
+//                NSLayoutConstraint(item: imageView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100).isActive = true
             
             
             var scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
