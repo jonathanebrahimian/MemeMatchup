@@ -20,6 +20,7 @@ class MemeRoundsModel: NSObject
 {
     static let shared = MemeRoundsModel()
     
+    private(set) var currentRound: Int = 1;
     public var numOfRounds: Int {
         get {
             return _numOfRounds
@@ -39,12 +40,12 @@ class MemeRoundsModel: NSObject
     
     private var _numOfRounds: Int = 3
     private var playerNames: [String] = []
-    private var currentRound: Int = 1;
     private var rounds: [[String: CaptionedMeme]] = []
     private var gameWins: [String: Int] = [:]
     private var images: [String] = []
     private var memeURLs: [String: String] = [:]
     private var currentMemes: [String] = []
+    private var currentPlayerIndex: Int = 0
     
     private override init() {
         super.init()
@@ -100,6 +101,23 @@ class MemeRoundsModel: NSObject
         return playerNames;
     }
     
+    func getCurrentPlayer() -> String {
+        return playerNames[currentPlayerIndex]
+    }
+    
+    /// returns false if no more players to go next to
+    func nextPlayer() -> Bool {
+        currentPlayerIndex += 1
+        
+        if currentPlayerIndex >= playerNames.count
+        {
+            currentPlayerIndex = playerNames.count - 1
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func getRoundWinsFor(player name: String) -> Int {
         var wins = 0
         
@@ -121,6 +139,8 @@ class MemeRoundsModel: NSObject
     /// returns true when final round has been completed
     func declareWinner(winner name: String) -> Bool
     {
+        currentPlayerIndex = 0
+        
         rounds[currentRound - 1][name]?.isWinner = true
         currentRound += 1
         
@@ -139,18 +159,27 @@ class MemeRoundsModel: NSObject
     }
     
      func getImageFromName(name: String) -> UIImage {
-        let data = try? Data(contentsOf: URL(string: memeURLs[currentMemes[currentRound - 1]]!)!)
+        print("Attempting to download image \"\(name)\"...")
+        
+        let url = URL(string: name)
+        let data = try? Data(contentsOf: url!)
         return UIImage(data: data!)!
      }
     
+    func getCurrentMeme() -> String {
+        return currentMemes[currentRound - 1]
+    }
+    
     func getMemeWithoutReplacement() -> String
     {
+        // could error if we use up all the memes
         let randomIndex = Int.random(in: 1...(memeURLs.count - 1))
         memeURLs.removeValue(forKey: Array(memeURLs.keys)[randomIndex])
         return Array(memeURLs.values)[randomIndex]
     }
     
     func newGame() {
+        currentPlayerIndex = 0
         currentMemes.removeAll()
         
         for _ in 1...numOfRounds

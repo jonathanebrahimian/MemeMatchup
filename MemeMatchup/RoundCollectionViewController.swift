@@ -34,8 +34,8 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         else{
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RoundStart") as? RoundStartViewController
             {
-                vc.currRound = currRound + 1;
-                vc.round_count = numRounds;
+//                vc.currRound = currRound + 1;
+//                vc.round_count = numRounds;
 //                vc players = all player name in memes
 //                we need to enter info again since its cleaned
                 //round goes up
