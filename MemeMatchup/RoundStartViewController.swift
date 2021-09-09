@@ -8,61 +8,39 @@
 import UIKit
 
 class RoundStartViewController: UIViewController {
+    var player_name: String = "NO NAME";
+//    var players:[String] = [];
+//    var round_count = 0;
+//    var currRound = 1;
+//    var curr_player = 0;
     
-    var player_name:String = "Jonathan Ebrahimian";
-    @IBOutlet weak var playerNameLabel: UILabel!
-    var players:[String] = [];
-    var round_count = 0;
-    var currRound = 1;
-    var curr_player = 0;
-    var url = "";
-    var timer:Timer?
+    var timer: Timer?
     var timeLeft = 3
+    
+    @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
-    
     @IBOutlet weak var readyButton: UIButton!
-    
     @IBOutlet weak var roundLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        roundLabel.text = "Round: " + String(currRound);
+        
+        roundLabel.text = "Round: " + String(MemeRoundsModel.shared.currentRound);
+        
         timerLabel.isHidden = true;
-        
         timerLabel.text = "\(timeLeft) seconds left";
-        playerNameLabel.text = players[curr_player];
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        var request = URLRequest(url: URL(string: "https://api.imgflip.com/get_memes")!)
-        request.httpMethod = "GET"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let session = URLSession.shared
-        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
-                let data = json["data"]!;
-                let memes = data["memes"] as? [Any];
-                
-                let meme = memes![Int.random(in:0...memes!.count)] as! Dictionary<String, Any>
-                self.url = meme["url"] as! String;
-                
-            } catch {
-                print("error")
-            }
-        })
-
-        task.resume();
-        // Do any additional setup after loading the view.
+        playerNameLabel.text = MemeRoundsModel.shared.getCurrentPlayer();
     }
     
     @IBAction func readyClicked(_ sender: Any) {
         timerLabel.isHidden = false;
         readyButton.isHidden = true;
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
-        
     }
     
     @objc func onTimerFires()
@@ -81,26 +59,13 @@ class RoundStartViewController: UIViewController {
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? MemeCreationViewController{
-            self.curr_player += 1;
-            vc.player_name = self.player_name;
-            vc.meme_url = self.url;
-            vc.curr_player = self.curr_player;
-            vc.num_players = self.players.count;
-            vc.numRounds = round_count;
-            vc.currRound = currRound;
+        if let _ = segue.destination as? MemeCreationViewController{
+//            vc.player_name = self.player_name;
+//            vc.meme_url = self.url;
+//            vc.curr_player = self.curr_player;
+//            vc.num_players = self.players.count;
+//            vc.numRounds = round_count;
+//            vc.currRound = currRound;
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
