@@ -16,7 +16,7 @@ struct CaptionedMeme {
     var isWinner: Bool = false
 }
 
-class MemeRoundsModel
+class MemeRoundsModel: NSObject
 {
     static let shared = MemeRoundsModel()
     
@@ -46,7 +46,9 @@ class MemeRoundsModel
     private var memeURLs: [String: String] = [:]
     private var currentMemes: [String] = []
     
-    private init() {
+    private override init() {
+        super.init()
+        
         let params:Dictionary<String, String> = [:]
         var request = URLRequest(url: URL(string: "https://api.imgflip.com/get_memes")!)
         request.httpMethod = "GET"
@@ -69,15 +71,14 @@ class MemeRoundsModel
                     }
                 }
                 
-                print(self.memeURLs)
+                self.newGame()
+                
             } catch {
                 print("error")
             }
         })
 
         task.resume()
-        
-        newGame()
     }
     
     func storeMeme(meme: String, playerName: String, topText: UILabel, bottomText: UILabel, user: String, round: Int)
@@ -144,12 +145,14 @@ class MemeRoundsModel
     
     func getMemeWithoutReplacement() -> String
     {
-        let randomIndex = Int.random(in: 1..<memeURLs.count)
+        let randomIndex = Int.random(in: 1...(memeURLs.count - 1))
         memeURLs.removeValue(forKey: Array(memeURLs.keys)[randomIndex])
         return Array(memeURLs.values)[randomIndex]
     }
     
     func newGame() {
+        currentMemes.removeAll()
+        
         for _ in 1...numOfRounds
         {
             currentMemes.append(getMemeWithoutReplacement())
