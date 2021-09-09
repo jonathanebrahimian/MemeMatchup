@@ -118,7 +118,7 @@ class MemeRoundsModel: NSObject
         
         for round in rounds
         {
-            if ((round[name]?.isWinner) != nil)
+            if ((round[name]!.isWinner))
             {
                 wins += 1
             }

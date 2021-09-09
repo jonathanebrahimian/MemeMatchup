@@ -30,6 +30,8 @@ class ResultsViewController: UIViewController {
             return first.value > second.value
         }
         
+        print("Displaying final scores: \(sortedScores)")
+        
         if let first = sortedScores[safe: 0]
         {
             if first.value > 1
@@ -46,12 +48,12 @@ class ResultsViewController: UIViewController {
         
         if let second = sortedScores[safe: 1]
         {
-            if second.value > 1
+            if second.value != 1
             {
-                secondPlaceLabel.text = "\(second.key) - \(second.value) Votes"
+                secondPlaceLabel.text = "🎉 \(second.key) - \(second.value) Votes"
             }
             else {
-                secondPlaceLabel.text = "👑 \(second.key) - \(second.value) Vote"
+                secondPlaceLabel.text = "🎉 \(second.key) - \(second.value) Vote"
             }
         }
         else {
@@ -60,12 +62,12 @@ class ResultsViewController: UIViewController {
         
         if let third = sortedScores[safe: 2]
         {
-            if third.value > 1
+            if third.value != 1
             {
-                thirdPlaceLabel.text = "\(third.key) - \(third.value) Votes"
+                thirdPlaceLabel.text = "💩 \(third.key) - \(third.value) Votes"
             }
             else {
-                thirdPlaceLabel.text = "👑 \(third.key) - \(third.value) V  ote"
+                thirdPlaceLabel.text = "💩 \(third.key) - \(third.value) Vote"
             }
         }
         else {
