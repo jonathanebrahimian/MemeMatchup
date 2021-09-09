@@ -42,6 +42,8 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         playerTable.dataSource = self;
         stepper.autorepeat = true;
         // Do any additional setup after loading the view.
+        
+        MemeRoundsModel.shared.getPlayers()
     }
     @IBAction func addPlayerClicked(_ sender: Any) {
         if namePicker.isHidden{

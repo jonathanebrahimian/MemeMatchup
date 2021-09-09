@@ -66,11 +66,20 @@ class ResultsViewController: UIViewController {
     
     
     @IBAction func onBackToHome(_ sender: Any) {
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//
+//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+//
+//        self.present(nextViewController, animated:true, completion:nil)
         
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? HomeViewController
+        {
+            MemeRoundsModel.shared.newGame()
         
-        self.present(nextViewController, animated:true, completion:nil)
+            if let nav = navigationController{
+                nav.pushViewController(vc, animated: true)
+            }
+        }
     }
     
     /*
