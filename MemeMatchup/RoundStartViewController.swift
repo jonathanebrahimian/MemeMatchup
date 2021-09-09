@@ -28,7 +28,7 @@ class RoundStartViewController: UIViewController {
         roundLabel.text = "Round: " + String(MemeRoundsModel.shared.currentRound);
         
         timerLabel.isHidden = true;
-        timerLabel.text = "\(timeLeft) seconds left";
+        timerLabel.text = "\(timeLeft)";
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +47,7 @@ class RoundStartViewController: UIViewController {
     {
         timeLeft -= 1
         DispatchQueue.main.async {
-            self.timerLabel.text = "\(self.timeLeft) seconds left"
+            self.timerLabel.text = "\(self.timeLeft)"
         }
 
         if timeLeft <= 0 {
@@ -57,7 +57,7 @@ class RoundStartViewController: UIViewController {
             readyButton.isHidden = false
             performSegue(withIdentifier: "goToMemeCreation", sender: nil)
             timeLeft = 3
-            timerLabel.text = "\(timeLeft) seconds left"
+            timerLabel.text = "\(timeLeft)"
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -73,6 +73,10 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
         return self.memeImage;
     }
     
+    @IBAction func tappedScreen(_ sender: Any) {
+        self.memeTextField.resignFirstResponder();
+    }
+    
     @objc func onTimerFires()
     {
         timeLeft -= 1
