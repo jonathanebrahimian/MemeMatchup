@@ -38,7 +38,7 @@ class MemeRoundsModel: NSObject
         }
     }
     
-    private var _numOfRounds: Int = 3
+    private var _numOfRounds: Int = 1
     private var playerNames: [String] = []
     private var rounds: [[String: CaptionedMeme]] = []
     private var gameWins: [String: Int] = [:]
@@ -118,7 +118,7 @@ class MemeRoundsModel: NSObject
         
         for round in rounds
         {
-            if ((round[name]?.isWinner) != nil)
+            if ((round[name]!.isWinner))
             {
                 wins += 1
             }
@@ -150,7 +150,7 @@ class MemeRoundsModel: NSObject
     
     func getCaptionedMemesForRound(round: Int) -> [String: CaptionedMeme]
     {
-        return rounds[round]
+        return rounds[round - 1]
     }
     
     func getImageFromURL(url_string: String) -> UIImage {
@@ -177,12 +177,20 @@ class MemeRoundsModel: NSObject
     {
         print("Storing meme for player \"\(forPlayer)\" with captions: \n\t\(String( topText.text!)) \n\t\(String(bottomText.text!))")
         
-        rounds.append([forPlayer : CaptionedMeme(meme_url: getCurrentMemeURL(), playerName: forPlayer, topLabel: topText, bottomLabel: bottomText)])
+        // prepopulate rounds
+        while rounds.count < numOfRounds
+        {
+            rounds.append([:])
+        }
+        
+        // add meme for player
+        rounds[currentRound - 1][forPlayer] = CaptionedMeme(meme_url: getCurrentMemeURL(), playerName: forPlayer, topLabel: topText, bottomLabel: bottomText)
     }
     
     func newGame() {
         currentPlayerIndex = 0
         currentMemes.removeAll()
+        playerNames.removeAll()
         
         for _ in 1...numOfRounds
         {
@@ -216,6 +224,6 @@ class MemeRoundsModel: NSObject
         
         gameWins[winner, default: 0] += 1
         
-        newGame()
+//        newGame()
     }
 }

@@ -23,6 +23,7 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         valueLabel.text = Int(sender.value).description;
         MemeRoundsModel.shared.numOfRounds = Int(Int(sender.value).description) ?? 1;
+        print(MemeRoundsModel.shared.numOfRounds)
         //        here we store the round number
         //        if it is nil or invalid, use 1 as default
     }
@@ -35,6 +36,9 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         playerTable.delegate = self;
         playerTable.dataSource = self;
         stepper.autorepeat = true;
+        // Do any additional setup after loading the view.
+        
+//        MemeRoundsModel.shared.getPlayers()
     }
     @IBAction func addPlayerClicked(_ sender: Any) {
         if namePicker.isHidden{
@@ -100,6 +104,7 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let _ = segue.destination as? RoundStartViewController{
+            
 //            vc.players = MemeRoundsModel.shared.getPlayers();
 //            vc.round_count = MemeRoundsModel.shared.numOfRounds;
         }

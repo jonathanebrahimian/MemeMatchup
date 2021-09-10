@@ -3,42 +3,37 @@
 //  MemeMatchup
 //
 //  Created by Zhengran Jiang on 9/6/21.
-//question asked:
-
 
 import UIKit
 
 private let reuseIdentifier = "cellId"
-//private var roundMeme = MemeRoundsModel.shared
-private var testarr = ["test","test2","test3"];
 private var ind = 0;
 class RoundCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBAction func winClick(_ sender: UIButton) {
-        print("win selected");
-        let cell = sender.nearestAncestor(ofType: UICollectionViewCell.self);
         
+        let cell = sender.nearestAncestor(ofType: UICollectionViewCell.self);
         let indexPath = self.collectionView?.indexPath(for: cell!);
-        print(indexPath);
-        if(currRound == numRounds){
+        var playernames = MemeRoundsModel.shared.getPlayers()
+        var player = playernames[indexPath!.row]
+        MemeRoundsModel.shared.declareWinner(winner: player)
+        print("Winner: ")
+        print(indexPath)
+//        print(MemeRoundsModel.shared.currentRound)
+//        print(MemeRoundsModel.shared.numOfRounds)
+        if(MemeRoundsModel.shared.currentRound > MemeRoundsModel.shared.numOfRounds){
             //if we go through all rounds
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultView") as? ResultsViewController
             {
                 if let nav = navigationController{
                     nav.pushViewController(vc, animated: true)
                 }
-    //            self.present(vc, animated: true, completion: nil)
         
             }
-            print("JERE")
+            
         }
         else{
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RoundStart") as? RoundStartViewController
             {
-//                vc.currRound = currRound + 1;
-//                vc.round_count = numRounds;
-//                vc players = all player name in memes
-//                we need to enter info again since its cleaned
-                //round goes up
             
                 if let nav = navigationController{
                     nav.pushViewController(vc, animated: true)
@@ -46,19 +41,12 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     //            self.present(vc, animated: true, completion: nil)
         
             }
-            print("HERE")
+            
         }
     }
-//    var scr = UIScrollView();
-//    override func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-//        return self.image
-//    }
-    
-    var numberOfPlayers = 0;
-    
-    var currRound = 1;
-    var numRounds = 1;
+
     let cellId = "cellId";
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,6 +54,8 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
+       
+        
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.contentInset = UIEdgeInsets(top: 50,left: 0,bottom: 0,right: 0);
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50,left: 0,bottom: 0,right: 0);
@@ -95,7 +85,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return numberOfPlayers;
+        return MemeRoundsModel.shared.getPlayers().count;
     }
     
     
@@ -113,39 +103,23 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath);
         
-        if (ind < testarr.count){
-//            var test = MemeRoundsModel.shared
-//            var temp = test.getPlayers()
-//            print(temp.count)
-            var imageName = ""
-            imageName = testarr[ind];
-            ind = ind+1
-            let image = UIImage(named: imageName)
-            let imageView = UIImageView(image: image!)
-            
-            imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-            
-            
-            
-            var scroll = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//            scroll.backgroundColor = .systemTeal
-            scroll.contentSize = CGSize(width: scroll.contentSize.width, height: scroll.contentSize.height)
-            scroll.minimumZoomScale = 0.1
-            scroll.maximumZoomScale = 4
-//            scroll.delegate = self
-            scroll.addSubview(imageView)
-//            cell.addSubview(imageView)
-            cell.addSubview(scroll)
-        }
+        // get memes with captions
+        let roundMemes = MemeRoundsModel.shared.getCaptionedMemesForRound(round: MemeRoundsModel.shared.currentRound)
         
+        // Set the imageview
+        let imageView: UIImageView = UIImageView()
+        imageView.image = MemeRoundsModel.shared.getImageFromURL(url_string: MemeRoundsModel.shared.getCurrentMemeURL())
         
+        print("ROUND MEMES:")
+        print(roundMemes)
         
-//        cell.backgroundColor = UIColor.red;
-//        let roundLabel = UILabel(frame: CGRect(x:80,y:40,width: 40,height: 40))
-//        roundLabel.text = "Round: " + String(currRound);
-//        roundLabel.backgroundColor = UIColor.white;
-//        roundLabel.frame = CGRect(x:80,y:40,width: roundLabel.intrinsicContentSize.width,height:roundLabel.intrinsicContentSize.height)
+        // Set the toptext
+        let topLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.topLabel
         
+        // Set the bottomtext
+        let bottomLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.bottomLabel
+        
+        // Create the button
         let winBtn = UIButton(frame: CGRect(x:0,y:20,width: 70,height: 50));
         winBtn.backgroundColor = UIColor(red: 2/255, green: 117/255, blue: 216/255, alpha: 1)
 
@@ -157,10 +131,25 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         
         winBtn.addTarget(self, action: #selector(winClick(_:)), for: UIControl.Event.touchUpInside)
         
+        // Set positions
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        topLabel.frame = CGRect(x: (view.frame.width/2), y: (view.frame.height/8), width: imageView.frame.size.width, height:80)
+        topLabel.center.x = view.center.x
+        topLabel.center.y = view.center.y/4
+        
+        bottomLabel.frame = CGRect(x: (view.frame.width/2), y: (view.frame.height*3/4), width: imageView.frame.size.width, height:80)
+        bottomLabel.center.x = view.center.x
+        bottomLabel.center.y = view.center.y * 1.5
+        
+        // Add everything to cell
+        imageView.addSubview(topLabel)
+        imageView.addSubview(bottomLabel)
+        cell.addSubview(imageView)
         cell.addSubview(winBtn);
         
-//        cell.addSubview(roundLabel);
-        return cell;
+        return cell
+        
     }
 
 //    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
