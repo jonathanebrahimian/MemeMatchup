@@ -36,7 +36,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
     
     lazy var colors = [UIColor.black, UIColor.red, UIColor.blue]
     lazy var editing_bottom = true
-    lazy var timeLeft = 1000
+    lazy var timeLeft = 60
     var timer:Timer?
     
     override func viewDidLoad() {
@@ -52,8 +52,8 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
         bottomLabel.textColor = colors[0];
         
         // timer
-        timeLeft = 1000;
-        timerLabel.text = "\(timeLeft) seconds left";
+        timeLeft = 60;
+        timerLabel.text = "\(timeLeft)";
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true);
         
         memeTextField.delegate = self;
@@ -61,6 +61,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
             self.memeScrollView.addSubview(self.memeImage!);
             self.memeScrollView.contentSize = size;
             self.memeScrollView.minimumZoomScale = 0.1;
+            
             self.memeScrollView.delegate = self;
             
             
@@ -82,7 +83,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
     {
         timeLeft -= 1
         DispatchQueue.main.async{
-            self.timerLabel.text = "\(self.timeLeft) seconds left"
+            self.timerLabel.text = "\(self.timeLeft)"
         }
         
 
@@ -90,7 +91,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
             timer?.invalidate()
             timer = nil
             
-            timeLeft = 3
+            timeLeft = 60
             doneCreatingMeme((Any).self);
         }
     }

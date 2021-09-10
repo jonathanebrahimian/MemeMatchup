@@ -41,7 +41,7 @@ class RoundStartViewController: UIViewController {
         DispatchQueue.main.async {
             self.timerLabel.text = "\(self.timeLeft)";
         }
-        readyButton.isEnabled = true;
+        readyButton.isEnabled = false;
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
     }
     
@@ -56,7 +56,7 @@ class RoundStartViewController: UIViewController {
             timer?.invalidate()
             timer = nil
             timerLabel.text = ""
-            readyButton.isEnabled = false
+            readyButton.isEnabled = true
             performSegue(withIdentifier: "goToMemeCreation", sender: nil)
             timeLeft = 3
             DispatchQueue.main.async {

@@ -36,10 +36,19 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         playerTable.delegate = self;
         playerTable.dataSource = self;
         stepper.autorepeat = true;
+        navigationItem.hidesBackButton = true  ;
         // Do any additional setup after loading the view.
         
 //        MemeRoundsModel.shared.getPlayers()
+        DispatchQueue.main.async { [weak self] in
+            //Reloading the tableview after ALL values appended.
+            self?.playerTable.reloadData()
+        }
     }
+    
+    
+    
+    
     @IBAction func addPlayerClicked(_ sender: Any) {
         if namePicker.isHidden{
             namePicker.isHidden = false
