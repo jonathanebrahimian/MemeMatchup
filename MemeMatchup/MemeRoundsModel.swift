@@ -38,14 +38,14 @@ class MemeRoundsModel: NSObject
         }
     }
     
-    private var _numOfRounds: Int = 1
-    private var playerNames: [String] = []
-    private var rounds: [[String: CaptionedMeme]] = []
-    private var gameWins: [String: Int] = [:]
-    private var images: [String] = []
-    private var memeURLs: [String: String] = [:]
-    private var currentMemes: [String] = []
-    private var currentPlayerIndex: Int = 0
+    lazy private var _numOfRounds: Int = 1
+    lazy private var playerNames: [String] = []
+    lazy private var rounds: [[String: CaptionedMeme]] = []
+    lazy private var gameWins: [String: Int] = [:]
+    lazy private var images: [String] = []
+    lazy private var memeURLs: [String: String] = [:]
+    lazy private var currentMemes: [String] = []
+    lazy private var currentPlayerIndex: Int = 0
     
     private override init() {
         super.init()

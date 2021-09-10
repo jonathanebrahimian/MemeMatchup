@@ -6,8 +6,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "cellId"
-private var ind = 0;
 class RoundCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBAction func winClick(_ sender: UIButton) {
         

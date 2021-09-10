@@ -34,9 +34,9 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
     //    var curr_player = 0;
     //    var num_players = 0;
     
-    var colors = [UIColor.black, UIColor.red, UIColor.blue]
-    var editing_bottom = true
-    var timeLeft = 1000
+    lazy var colors = [UIColor.black, UIColor.red, UIColor.blue]
+    lazy var editing_bottom = true
+    lazy var timeLeft = 1000
     var timer:Timer?
     
     override func viewDidLoad() {

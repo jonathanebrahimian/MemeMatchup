@@ -8,14 +8,9 @@
 import UIKit
 
 class RoundStartViewController: UIViewController {
-    var player_name: String = "NO NAME";
-//    var players:[String] = [];
-//    var round_count = 0;
-//    var currRound = 1;
-//    var curr_player = 0;
     
     var timer: Timer?
-    var timeLeft = 3
+    lazy var timeLeft = 3
     
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!
@@ -60,14 +55,9 @@ class RoundStartViewController: UIViewController {
             timerLabel.text = "\(timeLeft)"
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let _ = segue.destination as? MemeCreationViewController{
-//            vc.player_name = self.player_name;
-//            vc.meme_url = self.url;
-//            vc.curr_player = self.curr_player;
-//            vc.num_players = self.players.count;
-//            vc.numRounds = round_count;
-//            vc.currRound = currRound;
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let _ = segue.destination as? MemeCreationViewController{
+//
+//        }
+//    }
 }
