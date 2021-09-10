@@ -48,6 +48,9 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
             self?.playerTable.reloadData()
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        MemeRoundsModel.shared.numOfRounds = 1
+    }
     
     
     

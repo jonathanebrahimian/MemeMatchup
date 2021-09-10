@@ -54,7 +54,6 @@ class MemeRoundsModel: NSObject
         //learned syntax for making a rest API call from link above
         
         //configuring call
-        let params:Dictionary<String, String> = [:]
         var request = URLRequest(url: URL(string: "https://api.imgflip.com/get_memes")!)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
