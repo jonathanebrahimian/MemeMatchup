@@ -79,7 +79,7 @@
                                         </constraints>
                                         <state key="normal" title="Start Game"/>
                                         <connections>
-                                            <segue destination="tKd-Pb-stj" kind="show" id="vfZ-Zx-H0k"/>
+                                            <action selector="startGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KZB-fh-SHt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -116,6 +116,7 @@
                         <outlet property="playerTable" destination="0Ev-md-sa6" id="Nxx-NR-913"/>
                         <outlet property="stepper" destination="sdK-Pt-NiS" id="mfQ-7c-xY6"/>
                         <outlet property="valueLabel" destination="nLD-E6-mSg" id="aFe-ee-wgv"/>
+                        <segue destination="tKd-Pb-stj" kind="show" identifier="goToRoundStart" id="a7Q-U2-RAT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

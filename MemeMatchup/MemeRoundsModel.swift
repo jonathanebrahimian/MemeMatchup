@@ -50,12 +50,18 @@ class MemeRoundsModel: NSObject
     private override init() {
         super.init()
         
+        //https://stackoverflow.com/questions/24321165/make-rest-api-call-in-swift
+        //learned syntax for making a rest API call from link above
+        
+        //configuring call
         let params:Dictionary<String, String> = [:]
         var request = URLRequest(url: URL(string: "https://api.imgflip.com/get_memes")!)
         request.httpMethod = "GET"
         request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        
+        //api call and response capture
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             do {

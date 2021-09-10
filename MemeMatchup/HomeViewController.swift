@@ -36,6 +36,9 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         playerTable.delegate = self;
         playerTable.dataSource = self;
         stepper.autorepeat = true;
+        
+        //https://stackoverflow.com/questions/32010429/how-to-disable-back-button-in-navigation-bar
+        //learned how to hide back button from stack overflow above
         navigationItem.hidesBackButton = true  ;
         // Do any additional setup after loading the view.
         
@@ -109,6 +112,23 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         cell.textLabel!.text = MemeRoundsModel.shared.getPlayers()[indexPath.row]
         
         return cell;
+    }
+    
+    @IBAction func startGame(_ sender: Any) {
+        if(MemeRoundsModel.shared.getPlayers().count < 2){
+            //https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/
+            //used link above to learn how to create alerts
+            let alert = UIAlertController(title: "Please add more players", message: "You must have at least two players.", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+
+            self.present(alert, animated: true);
+            
+        }else{
+            performSegue(withIdentifier: "goToRoundStart", sender: nil)
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

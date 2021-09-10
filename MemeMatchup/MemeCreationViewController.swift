@@ -54,15 +54,20 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
         // timer
         timeLeft = 60;
         timerLabel.text = "\(timeLeft)";
+        //https://learnappmaking.com/timer-swift-how-to/
+        //learned how to create a timer form link above
+        //call method (onTimerFires) every second
+        // onTimerFires decrement var every second
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true);
         
         memeTextField.delegate = self;
         if let size = self.memeImage?.image?.size{
+            self.memeScrollView.delegate = self;
             self.memeScrollView.addSubview(self.memeImage!);
             self.memeScrollView.contentSize = size;
             self.memeScrollView.minimumZoomScale = 0.1;
-            self.memeScrollView.setZoomScale(0.1, animated: false)
-            self.memeScrollView.delegate = self;
+            self.memeScrollView.setZoomScale(0.5, animated: false);
+            
             
 
         }
@@ -78,6 +83,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
         self.memeTextField.resignFirstResponder();
     }
     
+    //timer method
     @objc func onTimerFires()
     {
         timeLeft -= 1
@@ -166,27 +172,3 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
         }
     }
 }
-
-
-//extension UIImageView {
-//    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-//        contentMode = mode
-//        URLSession.shared.dataTask(with: url) { data, response, error in
-//            guard
-//                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-//                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-//                let data = data, error == nil,
-//                let image = UIImage(data: data)
-//                else { return }
-//            DispatchQueue.main.async() { [weak self] in
-//                self?.image = image
-//            }
-//        }.resume()
-//    }
-//    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
-//        guard let url = URL(string: link) else { return }
-//        downloaded(from: url, contentMode: mode)
-//    }
-//
-//
-//}

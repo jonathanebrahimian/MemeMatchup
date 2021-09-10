@@ -42,9 +42,14 @@ class RoundStartViewController: UIViewController {
             self.timerLabel.text = "\(self.timeLeft)";
         }
         readyButton.isEnabled = false;
+        //https://learnappmaking.com/timer-swift-how-to/
+        //learned how to create a timer form link above
+        //call method (onTimerFires) every second
+        // onTimerFires decrement var every second
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
     }
     
+    //timer continuation from stack overflow linked above
     @objc func onTimerFires()
     {
         timeLeft -= 1

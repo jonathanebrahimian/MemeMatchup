@@ -112,6 +112,8 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         print(roundMemes)
         
         // Set the toptext
+        //https://stackoverflow.com/questions/31503580/programmatically-set-position-of-swift-element
+        //Learned about translates auto resizing mask into constraints from the stack overflow above ^ (allows movement of labels programatically)
         let topLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.topLabel
         topLabel.translatesAutoresizingMaskIntoConstraints = true
         topLabel.numberOfLines = 2
