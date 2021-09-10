@@ -113,9 +113,14 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         
         // Set the toptext
         let topLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.topLabel
-        
+        topLabel.translatesAutoresizingMaskIntoConstraints = true
+        topLabel.numberOfLines = 2
+                
         // Set the bottomtext
         let bottomLabel: UILabel = roundMemes[MemeRoundsModel.shared.getPlayers()[indexPath.row]]!.bottomLabel
+        bottomLabel.translatesAutoresizingMaskIntoConstraints = true
+        bottomLabel.numberOfLines = 2
+        
         
         // Create the button
         let winBtn = UIButton(frame: CGRect(x:0,y:20,width: 70,height: 50));
@@ -143,6 +148,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         // Add everything to cell
         imageView.addSubview(topLabel)
         imageView.addSubview(bottomLabel)
+        
         cell.addSubview(imageView)
         cell.addSubview(winBtn);
         

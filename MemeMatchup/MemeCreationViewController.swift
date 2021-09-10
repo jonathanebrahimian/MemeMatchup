@@ -35,8 +35,8 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
     //    var num_players = 0;
     
     lazy var colors = [UIColor.black, UIColor.red, UIColor.blue]
-    lazy var editing_bottom = true
-    lazy var timeLeft = 60
+    lazy var editing_bottom = false;
+    lazy var timeLeft = 60;
     var timer:Timer?
     
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
             self.memeScrollView.addSubview(self.memeImage!);
             self.memeScrollView.contentSize = size;
             self.memeScrollView.minimumZoomScale = 0.1;
-            self.memeScrollView.setZoomScale(0.25, animated: false)
+            self.memeScrollView.setZoomScale(0.1, animated: false)
             self.memeScrollView.delegate = self;
             
 

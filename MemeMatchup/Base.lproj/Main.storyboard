@@ -192,10 +192,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ukr-VT-yC4">
-                                <rect key="frame" x="0.0" y="88" width="414" height="698"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DDQ-z5-eUM">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="349"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="387"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWi-8W-6xJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -207,7 +207,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbN-Cm-zIG">
-                                                <rect key="frame" x="0.0" y="50" width="414" height="249"/>
+                                                <rect key="frame" x="0.0" y="50" width="414" height="287"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="xlK-YB-wyF"/>
                                                 </constraints>
@@ -215,7 +215,7 @@
                                                 <viewLayoutGuide key="frameLayoutGuide" id="YWy-kg-Wjc"/>
                                             </scrollView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ET9-rS-AEw">
-                                                <rect key="frame" x="0.0" y="299" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="337" width="414" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="UQG-W4-Bab"/>
                                                 </constraints>
@@ -226,7 +226,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mMC-oH-h6x">
-                                        <rect key="frame" x="0.0" y="349" width="414" height="349"/>
+                                        <rect key="frame" x="0.0" y="387" width="414" height="387"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meme Text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Lv-QP-yeC">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
@@ -253,7 +253,7 @@
                                                             <action selector="borderChange:" destination="hmE-0l-Muo" eventType="valueChanged" id="i9P-W3-xjd"/>
                                                         </connections>
                                                     </segmentedControl>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="liM-hy-xrw">
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="liM-hy-xrw">
                                                         <rect key="frame" x="365" y="0.0" width="51" height="31"/>
                                                         <connections>
                                                             <action selector="topBottomToggle:" destination="hmE-0l-Muo" eventType="valueChanged" id="ktU-gD-dBw"/>
@@ -282,7 +282,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-lM-Or4">
-                                                <rect key="frame" x="0.0" y="151" width="414" height="198"/>
+                                                <rect key="frame" x="0.0" y="151" width="414" height="236"/>
                                                 <state key="normal" title="Done"/>
                                                 <connections>
                                                     <action selector="doneCreatingMeme:" destination="hmE-0l-Muo" eventType="touchUpInside" id="eYe-QT-3ZG"/>
