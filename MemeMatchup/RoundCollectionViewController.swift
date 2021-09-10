@@ -145,7 +145,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         
         bottomLabel.frame = CGRect(x: (view.frame.width/2), y: (view.frame.height*3/4), width: imageView.frame.size.width, height:80)
         bottomLabel.center.x = view.center.x
-        bottomLabel.center.y = view.center.y * 1.5
+        bottomLabel.center.y = view.center.y * 1.2
         
         // Add everything to cell
         imageView.addSubview(topLabel)

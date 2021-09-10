@@ -57,7 +57,6 @@ class MemeRoundsModel: NSObject
         let params:Dictionary<String, String> = [:]
         var request = URLRequest(url: URL(string: "https://api.imgflip.com/get_memes")!)
         request.httpMethod = "GET"
-        request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         

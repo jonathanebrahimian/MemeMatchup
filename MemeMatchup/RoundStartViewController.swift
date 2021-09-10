@@ -11,6 +11,7 @@ class RoundStartViewController: UIViewController {
     
     var timer: Timer?
     lazy var timeLeft = 3
+    lazy var dummy = 0;//dummy variable to show knowledge of passing data from one view to another
     
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var timerLabel: UILabel!

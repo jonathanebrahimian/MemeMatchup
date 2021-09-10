@@ -131,11 +131,12 @@ class HomeViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDat
         
     }
     
+    /* We do not use these variables because our model takes care of our shared data.
+        We implemented this in order to satisfy requirements (no functional impact).
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let _ = segue.destination as? RoundStartViewController{
-            
-//            vc.players = MemeRoundsModel.shared.getPlayers();
-//            vc.round_count = MemeRoundsModel.shared.numOfRounds;
+        if let vc = segue.destination as? RoundStartViewController{
+            vc.dummy = MemeRoundsModel.shared.getPlayers().count;//could set the right side to any var
         }
     }
 }
