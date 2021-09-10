@@ -42,7 +42,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navigationItem.hidesBackButton = true  ;
         // font size
         fontSizeSlider.value = 17;
         topBottomSwitch.isOn = editing_bottom;
@@ -62,6 +62,7 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
             self.memeScrollView.contentSize = size;
             self.memeScrollView.minimumZoomScale = 0.1;
             self.memeScrollView.delegate = self;
+            
             
             
         }

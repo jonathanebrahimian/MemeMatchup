@@ -20,21 +20,28 @@ class RoundStartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        roundLabel.text = "Round: " + String(MemeRoundsModel.shared.currentRound);
         
-        timerLabel.isHidden = true;
-        timerLabel.text = "\(timeLeft)";
+        navigationItem.hidesBackButton = true ;
+        DispatchQueue.main.async {
+            self.roundLabel.text = "Round: " + String(MemeRoundsModel.shared.currentRound);
+            self.timerLabel.isEnabled = true;
+            self.timerLabel.text = "";
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        playerNameLabel.text = MemeRoundsModel.shared.getCurrentPlayer();
+        DispatchQueue.main.async {
+            self.playerNameLabel.text = MemeRoundsModel.shared.getCurrentPlayer();
+        }
     }
     
     @IBAction func readyClicked(_ sender: Any) {
-        timerLabel.isHidden = false;
-        readyButton.isHidden = true;
+        DispatchQueue.main.async {
+            self.timerLabel.text = "\(self.timeLeft)";
+        }
+        readyButton.isEnabled = true;
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
     }
     
@@ -48,11 +55,13 @@ class RoundStartViewController: UIViewController {
         if timeLeft <= 0 {
             timer?.invalidate()
             timer = nil
-            timerLabel.isHidden = true
-            readyButton.isHidden = false
+            timerLabel.text = ""
+            readyButton.isEnabled = false
             performSegue(withIdentifier: "goToMemeCreation", sender: nil)
             timeLeft = 3
-            timerLabel.text = "\(timeLeft)"
+            DispatchQueue.main.async {
+                self.timerLabel.text = ""
+            }
         }
     }
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
