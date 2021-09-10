@@ -97,7 +97,10 @@ class MemeRoundsModel: NSObject
     }
     
     func getCurrentPlayer() -> String {
-        return playerNames[currentPlayerIndex]
+        if playerNames.count != 0{
+            return playerNames[currentPlayerIndex];
+        }
+        return "";
     }
     
     /// returns false if no more players to go next to

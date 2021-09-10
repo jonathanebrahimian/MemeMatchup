@@ -82,19 +82,15 @@ class ResultsViewController: UIViewController {
 //        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
 //
 //        self.present(nextViewController, animated:true, completion:nil)
-        MemeRoundsModel.shared.newGame()
-        if let nav = navigationController{
-            nav.popToRootViewController(animated: true)
+        
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? HomeViewController
+        {
+            MemeRoundsModel.shared.newGame()
+        
+            if let nav = navigationController{
+                nav.pushViewController(vc, animated: true)
+            }
         }
-        
-        
-//        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home") as? HomeViewController
-//        {
-//
-//            if let nav = navigationController{
-//
-//            }
-//        }
     }
     
     /*

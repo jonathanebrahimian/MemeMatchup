@@ -61,11 +61,10 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
             self.memeScrollView.addSubview(self.memeImage!);
             self.memeScrollView.contentSize = size;
             self.memeScrollView.minimumZoomScale = 0.1;
-            
+            self.memeScrollView.setZoomScale(0.25, animated: false)
             self.memeScrollView.delegate = self;
             
-            
-            
+
         }
 
         // Do any additional setup after loading the view.
@@ -145,6 +144,8 @@ class MemeCreationViewController: UIViewController, UITextFieldDelegate, UIScrol
     }
     
     @IBAction func doneCreatingMeme(_ sender: Any) {
+        timer?.invalidate()
+        timer = nil
         MemeRoundsModel.shared.storeCaptions(forPlayer: MemeRoundsModel.shared.getCurrentPlayer(), topText: topLabel, bottomText: bottomLabel)
         
         if(MemeRoundsModel.shared.nextPlayer()) {
