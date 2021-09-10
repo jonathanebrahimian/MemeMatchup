@@ -45,3 +45,11 @@
 - Display # of wins per player
 - Display total time across all rounds for player
 - Display winning memes from each round
+
+### Team: MemeMatchup
+- Jonathan Ebrahimian
+- Nathan Gage
+- Edward Jiang 
+
+### YouTube Link:
+- https://www.youtube.com/watch?v=1laMyWra0Sw
