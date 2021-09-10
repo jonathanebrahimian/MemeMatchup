@@ -52,7 +52,7 @@ class RoundCollectionViewController: UICollectionViewController, UICollectionVie
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-       
+        navigationItem.hidesBackButton = true  ;
         
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.contentInset = UIEdgeInsets(top: 50,left: 0,bottom: 0,right: 0);

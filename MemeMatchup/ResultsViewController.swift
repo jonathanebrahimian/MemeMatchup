@@ -17,7 +17,7 @@ class ResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.hidesBackButton = true  ;
         let players = MemeRoundsModel.shared.getPlayers()
         var playerScores: Dictionary<String, Int> = [:]
         
